@@ -21,7 +21,7 @@ only when user wants to see them.
 只有当用户真实需要看到时，图片才会向服务器去请求内容，否着它是一张空白图片，
 对服务器没有负担。
 　　本插件可以与auto-highslide插件配合使用，效果更佳。
-　　当然你也可以使用另一个超强组合插件(http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/)来取代它俩的功能。
+　　当然你也可以使用另一个超强组合插件(<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/</a>)来取代它俩的功能。
 
 
 == Installation ==

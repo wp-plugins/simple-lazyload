@@ -12,6 +12,10 @@ simple-lazyload is an automatic image true lazyload plugin for WordPress, it can
 
 　　This plugin automatically copy image's src value to file attribute,replace src value with a blank image's url before showing, when the page is loaded,lazyload js will decide to load the images' actual content automatically,only when user wants to see the images.
 
+　　This plugin has a more perfect performance working with the "auto-highslide" plugin.
+
+　　Also, you can use another super pugin "<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>" instead of the two above.
+
 　　<a href="http://webdev.brunoxu.info/archives/223.html" target="_blank">Check the true lazyload effect Example 1</a>
 
 　　<a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank">Check the true lazyload effect Example 2</a>

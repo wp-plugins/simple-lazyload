@@ -15,8 +15,8 @@ replace src value with a blank image's url before showing, when the page is load
 lazyload js will decide to load the images' actual content automatically,
 only when user wants to see the images.
 
-　　本插件实现真实的图片迟加载功效，自动保存、替换图片的真实地址，
-只有当用户真实需要看到时，图片才会向服务器去请求内容，否着它是一张空白图片，
+　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，
+只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，
 对服务器没有负担。
 
 　　本插件可以与auto-highslide插件配合使用，效果更佳。

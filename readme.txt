@@ -23,8 +23,9 @@ only when user wants to see the images.
 
 　　当然你也可以使用另一个超强组合插件(<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/</a>)来取代它俩的功能。
 
-　　<a href="http://webdev.brunoxu.info/archives/223.html" target="_blank"><b>Check the true lazyload effect : Example 1</b></a><br/>
-　　<a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank"><b>Check the true lazyload effect : Example 2</b></a>
+　　<a href="http://webdev.brunoxu.info/archives/223.html" target="_blank">Check the true lazyload effect : Example 1</a>
+
+　　<a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank">Check the true lazyload effect : Example 2</a>
 
 
 == Installation ==

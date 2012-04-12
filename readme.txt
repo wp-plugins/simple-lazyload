@@ -1,4 +1,4 @@
-﻿=== Plugin Name ===
+﻿=== simple-lazyload ===
 Contributors: xiaoxu125634
 Donate link: http://blog.brunoxu.info/simple-lazyload/
 Tags: true lazyload, highslide, reduce http requests
@@ -9,8 +9,6 @@ Stable tag: trunk
 simple-lazyload is a automatic image lazyload plugin for WordPress, it can helps to reduce http requests effectively.
 
 == Description ==
-
-　　Plugin Name: simple-lazyload
 
 　　This plugin automatically copy image's src value to file attribute,
 replace src value with a blank image's url before showing, when the page is loaded,

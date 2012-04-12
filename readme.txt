@@ -6,7 +6,7 @@ Requires at least: 3.0
 Tested up to: 3.3
 Stable tag: trunk
 
-simple-lazyload is a automatic image lazyload plugin for WordPress, it can helps to reduce http requests effectively.
+simple-lazyload is an automatic image true lazyload plugin for WordPress, it can helps to reduce http requests effectively.
 
 == Description ==
 
@@ -22,6 +22,9 @@ only when user wants to see the images.
 　　本插件可以与auto-highslide插件配合使用，效果更佳。
 
 　　当然你也可以使用另一个超强组合插件(<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/</a>)来取代它俩的功能。
+
+　　<a href="http://webdev.brunoxu.info/archives/223.html" target="_blank"><b>Check the true lazyload effect : Example 1</b></a><br/>
+　　<a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank"><b>Check the true lazyload effect : Example 2</b></a>
 
 
 == Installation ==

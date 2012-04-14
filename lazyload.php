@@ -2,7 +2,7 @@
 /*
 Plugin Name: simple-lazyload
 Plugin URI: http://blog.brunoxu.info/simple-lazyload/
-Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.¡¡¡¡±¾²å¼şÊµÏÖÕæÊµµÄÍ¼Æ¬³Ù¼ÓÔØ¹¦Ğ§£¬×Ô¶¯±£´æ¡¢Ìæ»»Í¼Æ¬µÄÊµ¼ÊµØÖ·£¬Ö»ÓĞµ±ÓÃ»§ĞèÒª¿´µ½Ê±£¬²Å»áÏò·şÎñÆ÷È¥ÇëÇóÍ¼Æ¬ÄÚÈİ£¬·ñÔòÊÇÒ»ÕÅ¿Õ°×Í¼Æ¬£¬¶Ô·şÎñÆ÷Ã»ÓĞ¸ºµ£¡£¡¡¡¡±¾²å¼ş¿ÉÒÔÓë¡¾auto-highslide¡¿²å¼şÅäºÏÊ¹ÓÃ£¬Ğ§¹û¸ü¼Ñ¡£µ±È»ÄãÒ²¿ÉÒÔÊ¹ÓÃÁíÒ»¸ö³¬Ç¿×éºÏ²å¼ş¡¾<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>¡¿À´È¡´úËüÁ©µÄ¹¦ÄÜ¡£
+Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.ã€€ã€€æœ¬æ’ä»¶å®ç°çœŸå®çš„å›¾ç‰‡è¿ŸåŠ è½½åŠŸæ•ˆï¼Œè‡ªåŠ¨ä¿å­˜ã€æ›¿æ¢å›¾ç‰‡çš„å®é™…åœ°å€ï¼Œåªæœ‰å½“ç”¨æˆ·éœ€è¦çœ‹åˆ°æ—¶ï¼Œæ‰ä¼šå‘æœåŠ¡å™¨å»è¯·æ±‚å›¾ç‰‡å†…å®¹ï¼Œå¦åˆ™æ˜¯ä¸€å¼ ç©ºç™½å›¾ç‰‡ï¼Œå¯¹æœåŠ¡å™¨æ²¡æœ‰è´Ÿæ‹…ã€‚ã€€ã€€æœ¬æ’ä»¶å¯ä»¥ä¸ã€auto-highslideã€‘æ’ä»¶é…åˆä½¿ç”¨ï¼Œæ•ˆæœæ›´ä½³ã€‚å½“ç„¶ä½ ä¹Ÿå¯ä»¥ä½¿ç”¨å¦ä¸€ä¸ªè¶…å¼ºç»„åˆæ’ä»¶ã€<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>ã€‘æ¥å–ä»£å®ƒä¿©çš„åŠŸèƒ½ã€‚
 Version: 1.0
 Author: Bruno Xu
 Author URI: http://blog.brunoxu.info/

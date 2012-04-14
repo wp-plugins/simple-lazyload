@@ -1,4 +1,4 @@
-﻿=== simple-lazyload ===
+=== simple-lazyload ===
 Contributors: xiaoxu125634
 Donate link: http://blog.brunoxu.info/simple-lazyload/
 Tags: true lazyload, highslide, reduce http requests

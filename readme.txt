@@ -48,5 +48,10 @@ Still Not Working, Leave a message to me in   http://blog.brunoxu.info/simple-la
 
 == Changelog ==
 
+= 1.1 =
+* 2012-04-15
+* 	fixbug : lazyload sometime don't work, images can't showing.
+* 	upgrade : add javascripts to footer, no longer to the head.
+
 = 1.0 =
-* 2012-03-25 插件发布
+* 2012-03-25 simple-lazyload released.

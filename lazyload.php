@@ -2,94 +2,107 @@
 /*
 Plugin Name: simple-lazyload
 Plugin URI: http://blog.brunoxu.info/simple-lazyload/
-Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。　　本插件可以与【auto-highslide】插件配合使用，效果更佳。当然你也可以使用另一个超强组合插件【<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>】来取代它俩的功能。
-Version: 1.2
+Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
+Version: 1.3
 Author: Bruno Xu
 Author URI: http://blog.brunoxu.info/
 */
 
-define('SIMPLE_LAZYLOAD_VER', '1.2');
+define('SIMPLE_LAZYLOAD_VER', '1.3');
 
 
-add_filter('the_content', 'simple_lazyload_replace', 11);
-//add_action('wp_head', 'simple_lazyload_head', 11);
-add_action('wp_footer', 'simple_lazyload_footer', 11);
+add_filter('the_content', 'simple_lazyload_filter', 11);
+
+add_action('wp_head', 'simple_lazyload_js', 11);
+//add_action('wp_footer', 'simple_lazyload_js', 11);
 
 
-/* simple_lazyload_replace */
-function simple_lazyload_replace($content)
+add_action('wp_enqueue_scripts', 'simple_lazyload_script');
+function simple_lazyload_script()
 {
-	global $post;
+	wp_enqueue_script('jquery');
+}
 
-	$blank_image_src = get_bloginfo('wpurl') . '/wp-content/plugins/simple-lazyload/loading_1.gif';//blank_image.gif
-	$pattern = "/<img([^<>]*)(src=)('|\")([^<>]*)\.(bmp|gif|jpeg|jpg|png)('|\")([^<>]*)>/i";
-	$replacement = '<img$1src="'.$blank_image_src.'" file="$4.$5"$7>';
-	$content = preg_replace($pattern, $replacement, $content);
+/* simple_lazyload_filter */
+function simple_lazyload_filter($content)
+{
+	$content = preg_replace_callback(
+		"/<img([^<>]*)>/i",
+		"lazyimg_str_handler",
+		$content
+	);
 
 	return $content;
 }
+function lazyimg_str_handler($matches) {
+	$alt_image_src = get_bloginfo('wpurl') . '/wp-content/plugins/simple-lazyload/loading.gif';//blank.gif
 
-/* simple_lazyload_footer */
-function simple_lazyload_footer() {
-	print('
-<!-- simple-lazyload -->
-<script type="text/javascript">
-var needtodoFunctions = new Array();
-function needtodosth() {
-	for (var i=0;i<needtodoFunctions.length;i++) {
-		needtodoFunctions[i].call();
-	}
-}
+	$lazyimg_str = $matches[0];
 
-function realize_lazyload() {
-	jQuery(document).ready(function($) {
-		function lazyload(){
-			$("img").each(function(){
-				if ($(this).attr("file")
-						&& (!$(this).attr("src")
-							|| ($(this).attr("src") && $(this).attr("file")!=$(this).attr("src"))
-							)
-					) {
-					if(($(this).offset().top)<$(window).height()+$(document).scrollTop()&&($(this).offset().left)<$(window).width()+$(document).scrollLeft()) {
-						$(this).attr("src",$(this).attr("file"));
-					}
-				}
-			});
-		}
-		lazyload();
-		$(window).scroll(lazyload);
-		$(window).resize(lazyload);
-	});
-}
-needtodoFunctions.push(realize_lazyload);
-
-var isJqueryLazyLoaded = false;
-var limitWaitMillionseconds = 4000;
-var waitStep = 200;
-var waitedMillionseconds = 0;
-function loadjqAndDosth() {
-	if (typeof(jQuery)=="undefined") {
-		if (! isJqueryLazyLoaded) {
-			var jq = document.createElement("script");
-			jq.type = "text/javascript";
-			jq.src = "' . get_bloginfo('wpurl') . '/wp-content/plugins/simple-lazyload/jquery.js";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(jq, s);
-
-			isJqueryLazyLoaded = true;
-		}
-
-		waitedMillionseconds += waitStep;
-		if (waitedMillionseconds <= limitWaitMillionseconds) {
-			setTimeout("loadjqAndDosth()", waitStep);
-		}
+	if (stripos($lazyimg_str, "class=") === FALSE) {
+		$lazyimg_str = preg_replace(
+			"/<img(.*)>/i",
+			'<img class="lh_lazyimg"$1>',
+			$lazyimg_str
+		);
 	} else {
-		needtodosth();
+		$lazyimg_str = preg_replace(
+			"/<img(.*)class=['\"]([\w\-\s]*)['\"](.*)>/i",
+			'<img$1class="$2 lh_lazyimg"$3>',
+			$lazyimg_str
+		);
 	}
+
+	$lazyimg_str = preg_replace(
+		"/<img([^<>]*)src=['\"]([^<>]*)\.(bmp|gif|jpeg|jpg|png)['\"]([^<>]*)>/i",
+		'<img$1src="'.$alt_image_src.'" file="$2.$3"$4><noscript>'.$matches[0].'</noscript>',
+		$lazyimg_str
+	);
+
+	return $lazyimg_str;
 }
-loadjqAndDosth();
+
+/* simple_lazyload_js */
+function simple_lazyload_js()
+{
+	print('
+<!-- hidden lazyload image -->
+<noscript>
+<style type="text/css">
+.lh_lazyimg{display:none;}
+</style>
+</noscript>
+<!-- hidden lazyload image end -->
+
+<!-- lazyload -->
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	function lazyload(){
+		$("img.lh_lazyimg").each(function(){
+			_self = $(this);
+			if (!_self.attr("lazyloadpass")
+					&& _self.attr("file")
+					&& (!_self.attr("src")
+							|| (_self.attr("src") && _self.attr("file")!=_self.attr("src"))
+						)
+				) {
+				if((_self.offset().top) < $(window).height()+$(document).scrollTop()
+						&& (_self.offset().left) < $(window).width()+$(document).scrollLeft()
+					) {
+					_self.attr("src",_self.attr("file"));
+					_self.attr("lazyloadpass", "1");
+				}
+			}
+		});
+	}
+	lazyload();
+
+	var itv;
+	$(window).scroll(function(){clearTimeout(itv);itv=setTimeout(lazyload,500);});
+	$(window).resize(function(){clearTimeout(itv);itv=setTimeout(lazyload,500);});
+});
 </script>
-<!-- simple-lazyload end -->
+<!-- lazyload end -->
 ');
 }
 

@@ -20,7 +20,9 @@ Also, you can use another combined pugin "<a href="http://blog.brunoxu.info/auto
 /**********************************************************/
 
 <a href="http://webdev.brunoxu.info/archives/223.html" target="_blank">View the true lazyload effect Example 1</a>
+
 <a href="http://webdev.brunoxu.info/archives/219.html" target="_blank">View the true lazyload effect Example 2</a>
+
 <a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank">View the true lazyload effect Example 3</a>
 
 /**********************************************************/

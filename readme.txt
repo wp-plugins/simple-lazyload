@@ -56,6 +56,10 @@ Still Not Working, Leave a message to me in   http://blog.brunoxu.info/simple-la
 
 == Changelog ==
 
+= 2.0 =
+* 2012-06-06
+* 	upgrade : expand the scope of lazyload. previously only the content images take effect, now all the images work.
+
 = 1.3 =
 * 2012-05-29
 * 	upgrade : images are visible even when javascript has been forbidden

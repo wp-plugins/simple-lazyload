@@ -3,18 +3,21 @@
 Plugin Name: simple-lazyload
 Plugin URI: http://blog.brunoxu.info/simple-lazyload/
 Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
-Version: 2.0
+Version: 2.1
 Author: Bruno Xu
 Author URI: http://blog.brunoxu.info/
 */
 
-define('SIMPLE_LAZYLOAD_VER', '2.0');
+define('SIMPLE_LAZYLOAD_VER', '2.1');
 
+$is_strict_lazyload = FALSE;
 
-function get_url($path='')
+function simple_lazyload_get_url($path='')
 {
 	return plugins_url(ltrim($path, '/'), __FILE__);
 }
+
+
 
 add_action('wp_enqueue_scripts', 'simple_lazyload_script');
 function simple_lazyload_script()
@@ -43,9 +46,20 @@ function simple_lazyload_lazyload()
 	{
 		global $is_strict_lazyload;
 
-		$alt_image_src = get_url("blank.gif");
-
 		$lazyimg_str = $matches[0];
+
+		if (preg_match("/width=/i", $lazyimg_str)
+				|| preg_match("/width:/i", $lazyimg_str)
+				|| preg_match("/height=/i", $lazyimg_str)
+				|| preg_match("/height:/i", $lazyimg_str)) {
+			$alt_image_src = simple_lazyload_get_url("blank_1x1.gif");
+		} else {
+			if (preg_match("/\/smilies\//i", $lazyimg_str)) {
+				$alt_image_src = simple_lazyload_get_url("blank_1x1.gif");
+			} else {
+				$alt_image_src = simple_lazyload_get_url("blank_250x250.gif");
+			}
+		}
 
 		if (stripos($lazyimg_str, "class=") === FALSE) {
 			$lazyimg_str = preg_replace(
@@ -103,6 +117,15 @@ function simple_lazyload_lazyload()
 	function simple_lazyload_footer_lazyload()
 	{
 		print('
+<!-- lazyload images -->
+<style type="text/css">
+.lh_lazyimg{
+opacity:0.2;filter:alpha(opacity=20);
+background:url('.simple_lazyload_get_url("loading.gif").') no-repeat center center;
+}
+</style>
+<!-- lazyload images end -->
+
 <!-- case nojs, hidden lazyload images -->
 <noscript>
 <style type="text/css">
@@ -126,7 +149,6 @@ jQuery(document).ready(function($) {
 				if((_self.offset().top) < $(window).height()+$(document).scrollTop()
 						&& (_self.offset().left) < $(window).width()+$(document).scrollLeft()
 					) {
-					_self.css("opacity", 0);
 					_self.attr("src",_self.attr("file"));
 					_self.attr("lazyloadpass", "1");
 					_self.animate({opacity:1}, 500);

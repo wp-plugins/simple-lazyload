@@ -3,12 +3,12 @@
 Plugin Name: simple-lazyload
 Plugin URI: http://blog.brunoxu.info/simple-lazyload/
 Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
-Version: 2.1
+Version: 2.2
 Author: Bruno Xu
 Author URI: http://blog.brunoxu.info/
 */
 
-define('SIMPLE_LAZYLOAD_VER', '2.1');
+define('SIMPLE_LAZYLOAD_VER', '2.2');
 
 $is_strict_lazyload = FALSE;
 
@@ -47,6 +47,11 @@ function simple_lazyload_lazyload()
 		global $is_strict_lazyload;
 
 		$lazyimg_str = $matches[0];
+
+		//不需要lazyload的情况
+		if (preg_match("/\/plugins\/wp-postratings\//i", $lazyimg_str)) {
+			return $lazyimg_str;
+		}
 
 		if (preg_match("/width=/i", $lazyimg_str)
 				|| preg_match("/width:/i", $lazyimg_str)
@@ -94,6 +99,10 @@ function simple_lazyload_lazyload()
 
 	function simple_lazyload_content_filter_lazyload($content)
 	{
+		// Don't lazyload for feeds, previews, mobile
+		if( is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
+			return $content;
+
 		global $is_strict_lazyload;
 
 		if ($is_strict_lazyload) {

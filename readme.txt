@@ -56,6 +56,11 @@ Still Not Working, Leave a message to me in   http://blog.brunoxu.info/simple-la
 
 == Changelog ==
 
+= 2.2 =
+* 2012-07-17
+* 	upgrade : add exception for plugin WP-PostRatings, for displaying reason.
+* 	upgrade : do not lazyload images for feeds, previews, mobile. refer to Lazy Load plugin.
+
 = 2.1 =
 * 2012-06-07
 * 	upgrade : for better performance, images with width or height use blank_1x1.gif as placeholder, while images without width and height use blank_250x250.gif as placeholder(except: smilies)

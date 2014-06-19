@@ -1,9 +1,9 @@
 === simple-lazyload ===
 Contributors: xiaoxu125634
-Donate link: http://blog.brunoxu.info/simple-lazyload/
+Donate link: http://www.brunoxu.com/simple-lazyload.html
 Tags: true lazyload, highslide, reduce http requests
 Requires at least: 3.0
-Tested up to: 3.3
+Tested up to: 3.9.1
 Stable tag: trunk
 
 simple-lazyload is an automatic image true lazyload plugin for WordPress, it can helps to reduce http requests effectively.
@@ -13,25 +13,21 @@ simple-lazyload is an automatic image true lazyload plugin for WordPress, it can
 
 This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.
 
-This plugin has a more perfect performance working with the "auto-highslide" plugin.
-
-Also, you can use another combined pugin "<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>" instead of the two above.
+Besides lazyload, if you also need images slideshow effect or image popup view effect, better to use <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> instead.
 
 /**********************************************************/
 
-<a href="http://webdev.brunoxu.info/archives/223.html" target="_blank">View the true lazyload effect Example 1</a>
+<a href="http://webdev.brunoxu.com/archives/223.html" target="_blank">View Lazyload Effect Example 1</a>
 
-<a href="http://webdev.brunoxu.info/archives/219.html" target="_blank">View the true lazyload effect Example 2</a>
+<a href="http://webdev.brunoxu.com/archives/219.html" target="_blank">View Lazyload Effect Example 2</a>
 
-<a href="http://webdev.brunoxu.info/archives/1115.html" target="_blank">View the true lazyload effect Example 3</a>
+<a href="http://webdev.brunoxu.com/archives/1115.html" target="_blank">View Lazyload Effect Example 3</a>
 
 /**********************************************************/
 
 本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
 
-本插件可以与【auto-highslide】插件配合使用，效果更佳。
-
-当然你也可以使用另一个组合插件【<a href="http://blog.brunoxu.info/auto-lazyload-and-auto-highslide/" target="_blank">auto-lazyload-and-auto-highslide</a>】来取代它俩的功能。
+如果你同时也需要图片滑动效果或者图片弹出放大效果，可以选择使用  <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> 作为代替。
 
 
 == Installation ==
@@ -46,7 +42,7 @@ e.g.
 
 == Frequently Asked Questions ==
 
-Still Not Working, Leave a message to me in   http://blog.brunoxu.info/simple-lazyload/
+Still Not Working, Leave a message to me in   http://www.brunoxu.com/simple-lazyload.html
 
 
 == Screenshots ==
@@ -55,6 +51,11 @@ Still Not Working, Leave a message to me in   http://blog.brunoxu.info/simple-la
 
 
 == Changelog ==
+
+= 2.3 =
+* 2014-06-19
+* 	upgrade : optimize lazyload script, not to load images far from current screen above.
+* 	upgrade : change links of plugin homepage and author homepage.
 
 = 2.2 =
 * 2012-07-17

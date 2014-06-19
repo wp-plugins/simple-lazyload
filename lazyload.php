@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: simple-lazyload
-Plugin URI: http://blog.brunoxu.info/simple-lazyload/
+Plugin URI: http://www.brunoxu.com/simple-lazyload.html
 Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
-Version: 2.2
+Version: 2.3
 Author: Bruno Xu
-Author URI: http://blog.brunoxu.info/
+Author URI: http://www.brunoxu.com/
 */
 
-define('SIMPLE_LAZYLOAD_VER', '2.2');
+define('SIMPLE_LAZYLOAD_VER', '2.3');
 
 $is_strict_lazyload = FALSE;
 
@@ -69,13 +69,13 @@ function simple_lazyload_lazyload()
 		if (stripos($lazyimg_str, "class=") === FALSE) {
 			$lazyimg_str = preg_replace(
 				"/<img(.*)>/i",
-				'<img class="lh_lazyimg"$1>',
+				'<img class="sl_lazyimg"$1>',
 				$lazyimg_str
 			);
 		} else {
 			$lazyimg_str = preg_replace(
 				"/<img(.*)class=['\"]([\w\-\s]*)['\"](.*)>/i",
-				'<img$1class="$2 lh_lazyimg"$3>',
+				'<img$1class="$2 sl_lazyimg"$3>',
 				$lazyimg_str
 			);
 		}
@@ -128,7 +128,7 @@ function simple_lazyload_lazyload()
 		print('
 <!-- lazyload images -->
 <style type="text/css">
-.lh_lazyimg{
+.sl_lazyimg{
 opacity:0.2;filter:alpha(opacity=20);
 background:url('.simple_lazyload_get_url("loading.gif").') no-repeat center center;
 }
@@ -138,7 +138,7 @@ background:url('.simple_lazyload_get_url("loading.gif").') no-repeat center cent
 <!-- case nojs, hidden lazyload images -->
 <noscript>
 <style type="text/css">
-.lh_lazyimg{display:none;}
+.sl_lazyimg{display:none;}
 </style>
 </noscript>
 <!-- case nojs, hidden lazyload images end -->
@@ -146,30 +146,31 @@ background:url('.simple_lazyload_get_url("loading.gif").') no-repeat center cent
 <!-- lazyload -->
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-	function lazyload(){
-		$("img.lh_lazyimg").each(function(){
-			_self = $(this);
-			if (_self.attr("lazyloadpass")===undefined
-					&& _self.attr("file")
-					&& (!_self.attr("src")
-							|| (_self.attr("src") && _self.attr("file")!=_self.attr("src"))
-						)
+var sl_lazyload = function() {
+	var threshold = 200;
+	$("img.sl_lazyimg").each(function(){
+		_self = $(this);
+		if (_self.attr("lazyloadpass")===undefined
+				&& _self.attr("file")
+				&& ( !_self.attr("src") || (_self.attr("src") && _self.attr("file")!=_self.attr("src")) )
 				) {
-				if((_self.offset().top) < $(window).height()+$(document).scrollTop()
-						&& (_self.offset().left) < $(window).width()+$(document).scrollLeft()
-					) {
-					_self.attr("src",_self.attr("file"));
-					_self.attr("lazyloadpass", "1");
-					_self.animate({opacity:1}, 500);
-				}
+			if( (_self.offset().top) < ($(window).height()+$(document).scrollTop()+threshold)
+				&& (_self.offset().left) < ($(window).width()+$(document).scrollLeft()+threshold)
+				&& (_self.offset().top) > ($(document).scrollTop()-threshold)
+				&& (_self.offset().left) > ($(document).scrollLeft()-threshold)
+				) {
+				_self.attr("src",_self.attr("file"));
+				_self.attr("lazyloadpass","1");
+				_self.animate({opacity:1},400);
 			}
-		});
-	}
-	lazyload();
+		}
+	});
+}
+sl_lazyload();
 
-	var itv;
-	$(window).scroll(function(){clearTimeout(itv);itv=setTimeout(lazyload,400);});
-	$(window).resize(function(){clearTimeout(itv);itv=setTimeout(lazyload,400);});
+var sl_itv;
+$(window).scroll(function(){clearTimeout(sl_itv);sl_itv=setTimeout(sl_lazyload,400);});
+$(window).resize(function(){clearTimeout(sl_itv);sl_itv=setTimeout(sl_lazyload,400);});
 });
 </script>
 <!-- lazyload end -->
@@ -177,5 +178,3 @@ jQuery(document).ready(function($) {
 	}
 }
 simple_lazyload_lazyload();
-
-?>

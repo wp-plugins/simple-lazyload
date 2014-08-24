@@ -6,7 +6,7 @@ Requires at least: 3.0
 Tested up to: 3.9.2
 Stable tag: trunk
 
-Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time. 延迟加载所有图片，无需配置，有助于减少请求数，提高页面加载速度。
+Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time.
 
 
 == Description ==

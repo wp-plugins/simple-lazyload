@@ -1,33 +1,27 @@
 === simple-lazyload ===
 Contributors: xiaoxu125634
 Donate link: http://www.brunoxu.com/simple-lazyload.html
-Tags: true lazyload, highslide, reduce http requests
+Tags: lazy load, lazyload, images lazy load, images, lazy loading, optimize, performance, bandwidth
 Requires at least: 3.0
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: trunk
 
-simple-lazyload is an automatic image true lazyload plugin for WordPress, it can helps to reduce http requests effectively.
+Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time. 延迟加载所有图片，无需配置，有助于减少请求数，提高页面加载速度。
 
 
 == Description ==
 
-This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.
+Lazy loading makes your site load faster and saves bandwidth.
 
-Besides lazyload, if you also need images slideshow effect or image popup view effect, better to use <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> instead.
+This plugin replaces all images with a placeholder and loads the content as it gets close to enter the browser window when the visitor scrolls the page.
 
-/**********************************************************/
+Besides lazy load, if you also need lightbox effect or gallery slideshow effect for images, better to use <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> instead.
 
-<a href="http://webdev.brunoxu.com/archives/223.html" target="_blank">View Lazyload Effect Example 1</a>
+迟加载可以提高网站的加载速度，节约带宽。
 
-<a href="http://webdev.brunoxu.com/archives/219.html" target="_blank">View Lazyload Effect Example 2</a>
+插件用占位图来替换所有图片，当用户滚动窗口将要看到图片时才加载图片的真实内容。
 
-<a href="http://webdev.brunoxu.com/archives/1115.html" target="_blank">View Lazyload Effect Example 3</a>
-
-/**********************************************************/
-
-本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
-
-如果你同时也需要图片滑动效果或者图片弹出放大效果，可以选择使用  <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> 作为代替。
+如果你同时也需要图片弹出放大浏览效果或者相册滑动浏览效果，可以选择另一个插件 <a href="http://www.brunoxu.com/images-lazyload-and-slideshow.html" target="_blank">Images Lazyload and Slideshow</a> 看看。
 
 
 == Installation ==
@@ -51,6 +45,11 @@ Still Not Working, Leave a message to me in   http://www.brunoxu.com/simple-lazy
 
 
 == Changelog ==
+
+= 2.4 =
+* 2014-08-25
+* 	upgrade : optimize lazyload realization codes.
+* 	upgrade : optimize description and tags.
 
 = 2.3 =
 * 2014-06-19

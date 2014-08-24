@@ -2,13 +2,14 @@
 /*
 Plugin Name: simple-lazyload
 Plugin URI: http://www.brunoxu.com/simple-lazyload.html
-Description: This plugin automatically copy image's src value to file attribute, replace src value with a blank image's url before showing, when the page is loaded, lazyload js will decide to load the images' actual content automatically, only when user wants to see them.　　本插件实现真实的图片迟加载功效，自动保存、替换图片的实际地址，只有当用户需要看到时，才会向服务器去请求图片内容，否则是一张空白图片，对服务器没有负担。
-Version: 2.3
+Description: Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time. 延迟加载所有图片，无需配置，有助于减少请求数，提高页面加载速度。
 Author: Bruno Xu
 Author URI: http://www.brunoxu.com/
+Version: 2.4
+License: GPL
 */
 
-define('SIMPLE_LAZYLOAD_VER', '2.3');
+define('SIMPLE_LAZYLOAD_VER', '2.4');
 
 $is_strict_lazyload = FALSE;
 
@@ -16,7 +17,6 @@ function simple_lazyload_get_url($path='')
 {
 	return plugins_url(ltrim($path, '/'), __FILE__);
 }
-
 
 
 add_action('wp_enqueue_scripts', 'simple_lazyload_script');
@@ -30,18 +30,33 @@ function simple_lazyload_lazyload()
 	//init,get_header,wp_head
 	add_action('get_header','simple_lazyload_obstart');
 	function simple_lazyload_obstart() {
-		ob_start();
+		ob_start('simple_lazyload_obend');
 	}
-
-	//get_footer,wp_footer,shutdown(NG)
-	add_action('wp_footer','simple_lazyload_obend');
-	function simple_lazyload_obend() {
-		$echo = ob_get_contents(); //获取缓冲区内容
-		ob_clean(); //清楚缓冲区内容，不输出到页面
-		print simple_lazyload_content_filter_lazyload($echo); //重新写入的缓冲区
-		ob_end_flush(); //将缓冲区输入到页面，并关闭缓存区
+	function simple_lazyload_obend($content) {
+		return simple_lazyload_content_filter_lazyload($content);
 	}
+	function simple_lazyload_content_filter_lazyload($content)
+	{
+		// Don't lazyload for feeds, previews, mobile
+		if( is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
+			return $content;
 
+		global $is_strict_lazyload;
+
+		if ($is_strict_lazyload) {
+			$regexp = "/<img([^<>]*)\.(bmp|gif|jpeg|jpg|png)([^<>]*)>/i";
+		} else {
+			$regexp = "/<img([^<>]*)>/i";
+		}
+
+		$content = preg_replace_callback(
+			$regexp,
+			"lazyimg_str_handler",
+			$content
+		);
+
+		return $content;
+	}
 	function lazyimg_str_handler($matches)
 	{
 		global $is_strict_lazyload;
@@ -96,30 +111,6 @@ function simple_lazyload_lazyload()
 
 		return $lazyimg_str;
 	}
-
-	function simple_lazyload_content_filter_lazyload($content)
-	{
-		// Don't lazyload for feeds, previews, mobile
-		if( is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
-			return $content;
-
-		global $is_strict_lazyload;
-
-		if ($is_strict_lazyload) {
-			$regexp = "/<img([^<>]*)\.(bmp|gif|jpeg|jpg|png)([^<>]*)>/i";
-		} else {
-			$regexp = "/<img([^<>]*)>/i";
-		}
-
-		$content = preg_replace_callback(
-			$regexp,
-			"lazyimg_str_handler",
-			$content
-		);
-
-		return $content;
-	}
-
 
 	//add_action('wp_head', 'simple_lazyload_footer_lazyload', 11);
 	add_action('wp_footer', 'simple_lazyload_footer_lazyload', 11);

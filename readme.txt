@@ -3,7 +3,7 @@ Contributors: xiaoxu125634
 Donate link: http://www.brunoxu.com/simple-lazyload.html
 Tags: lazy load, lazyload, images lazy load, images, lazy loading, optimize, performance, bandwidth
 Requires at least: 3.0
-Tested up to: 3.9.2
+Tested up to: 4.0
 Stable tag: trunk
 
 Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time.

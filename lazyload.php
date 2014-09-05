@@ -6,7 +6,8 @@ Description: Lazy load all images without configurations. It helps to decrease n
 Author: Bruno Xu
 Author URI: http://www.brunoxu.com/
 Version: 2.4
-License: GPL
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 define('SIMPLE_LAZYLOAD_VER', '2.4');

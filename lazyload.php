@@ -1,16 +1,16 @@
 <?php
 /*
-Plugin Name: simple-lazyload
+Plugin Name: Simple Lazyload
 Plugin URI: http://www.brunoxu.com/simple-lazyload.html
 Description: Lazy load all images without configurations. It helps to decrease number of requests and improve page loading time. 延迟加载所有图片，无需配置，有助于减少请求数，提高页面加载速度。
 Author: Bruno Xu
 Author URI: http://www.brunoxu.com/
-Version: 2.4
+Version: 2.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-define('SIMPLE_LAZYLOAD_VER', '2.4');
+define('SIMPLE_LAZYLOAD_VER', '2.5');
 
 $is_strict_lazyload = FALSE;
 
@@ -28,8 +28,7 @@ function simple_lazyload_script()
 
 function simple_lazyload_lazyload()
 {
-	//init,get_header,wp_head
-	add_action('get_header','simple_lazyload_obstart');
+	add_action('template_redirect','simple_lazyload_obstart');
 	function simple_lazyload_obstart() {
 		ob_start('simple_lazyload_obend');
 	}
@@ -38,8 +37,10 @@ function simple_lazyload_lazyload()
 	}
 	function simple_lazyload_content_filter_lazyload($content)
 	{
+		$skip_lazyload = apply_filter('simple_lazyload_skip_lazyload', false);
+
 		// Don't lazyload for feeds, previews, mobile
-		if( is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
+		if( $skip_lazyload || is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )
 			return $content;
 
 		global $is_strict_lazyload;
@@ -65,6 +66,9 @@ function simple_lazyload_lazyload()
 		$lazyimg_str = $matches[0];
 
 		//不需要lazyload的情况
+		if (stripos($lazyimg_str, 'skip_lazyload') !== FALSE) {
+			return $lazyimg_str;
+		}
 		if (preg_match("/\/plugins\/wp-postratings\//i", $lazyimg_str)) {
 			return $lazyimg_str;
 		}

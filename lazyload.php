@@ -37,7 +37,7 @@ function simple_lazyload_lazyload()
 	}
 	function simple_lazyload_content_filter_lazyload($content)
 	{
-		$skip_lazyload = apply_filter('simple_lazyload_skip_lazyload', false);
+		$skip_lazyload = apply_filters('simple_lazyload_skip_lazyload', false);
 
 		// Don't lazyload for feeds, previews, mobile
 		if( $skip_lazyload || is_feed() || is_preview() || ( function_exists( 'is_mobile' ) && is_mobile() ) )

@@ -46,6 +46,10 @@ Still Not Working, Leave a message to me in   http://www.brunoxu.com/simple-lazy
 
 == Changelog ==
 
+= 2.6 =
+* 2014-09-26
+* upgrade: optimize process of lazy loading for better performance and comfortable experience.
+
 = 2.5 =
 * 2014-09-21
 * upgrade: add 'simple_lazyload_skip_lazyload' filter, use this you can customize lazy load scope.

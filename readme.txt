@@ -92,7 +92,7 @@ Still Not Working, Leave a message to me in   http://www.brunoxu.com/simple-lazy
 
 = 1.1 =
 * 2012-04-15
-* fixbug : lazyload sometime don't work, images can't showing
+* fixbug: lazyload sometime don't work, images can't showing
 * upgrade: add javascripts to footer, no longer to the head
 
 = 1.0 =

@@ -48,11 +48,12 @@ Still Not Working, Leave a message to me in   http://www.brunoxu.com/simple-lazy
 
 = 2.7 =
 * 2014-10-16
-* fixbug: prevent image's repeating loading.
+* fixbug: prevent image's multiple loading.
 * upgrade: fix height when post images use percent width.
 * upgrade: remove mobile exclusion.
 * upgrade: use new loading icon, more prominent.
 * upgrade: add 'simple_lazyload_loading_icon' filter for customizing loading icon.
+* upgrade: reload images which has error occuring during first loading.
 
 = 2.6 =
 * 2014-09-26

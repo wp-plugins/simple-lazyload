@@ -159,7 +159,7 @@ Array.prototype.pull=function(content){
 	this.length-=1;
 };
 
-jQuery(document).ready(function($) {
+jQuery(function($) {
 window._lazyimgs = $("img.sl_lazyimg");
 if (_lazyimgs.length == 0) {
 	return;
